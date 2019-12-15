@@ -10,47 +10,36 @@ class MyWigetAPP extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      title: "Widget 1212",
+      title: "Widget Image",
       theme: ThemeData.light(),
-      home: IndexPage(),
+      home: ImagePage(),
     );
   }
 }
 
-class IndexPage extends StatelessWidget {
+class ImagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("文本控件"),
+      appBar: AppBar(
+        title: new Text("Widget Image"),
       ),
       body: new Column(
-
         children: <Widget>[
-          new Text(
-            "带删除线,红色字体",
-            style: new TextStyle(
-                color: Color(0xffff0000),
-                 fontStyle: FontStyle.italic,
-                decoration:TextDecoration.lineThrough,fontSize: 25.0),
-          ),
-          new Text(
-            "带删除线,红色字体",
-            style: new TextStyle(
-                color: Color(0xffff0000),
-                fontStyle: FontStyle.italic,
-                decoration:TextDecoration.lineThrough,fontSize: 25.0),
-          ),
-          new Text(
-            "带删除线,红色字体",
-            style: new TextStyle(
-                color: Color(0xffff0000),
-                fontStyle: FontStyle.italic,
-                decoration:TextDecoration.lineThrough,fontSize: 25.0),
-          )
-        ],
+          //疑问:控件貌似没有background这一说, 可能需要用container
+          new Image.network(
+            "https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top-e3b63a0b1b.png",
+            fit: BoxFit.fitHeight,
 
+          ),
+        //new Image, for obtaining an image from an ImageProvider.
+          //new Image.asset, for obtaining an image from an AssetBundle using a key.
+          //new Image.network, for obtaining an image from a URL.
+          //new Image.file, for obtaining an image from a File.
+          //new Image.memory, for obtaining an image from a Uint8List.
+
+        ],
       ),
     );
   }

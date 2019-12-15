@@ -5,63 +5,90 @@ void main() {
   runApp(MyWigetAPP());
 }
 
+final title = "listview demo";
+
 class MyWigetAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      title: "Container Demo",
+      title: title,
       theme: ThemeData.light(),
-      home: ImagePage(),
+      //home: ListPage(),
+      home: ListDataPage(),
     );
   }
 }
 
-class ImagePage extends StatelessWidget {
+/**
+ * 数据加载list中
+ */
+class ListDataPage extends StatelessWidget {
+  List<String> dataStr = <String>[];
+   List<int> colorCodes = <int>[600, 500, 100];
+
+  ListDataPage() {
+    for (var i = 0; i < 50; i++) {
+      dataStr.add("item--$i");
+    }
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(title),
+      ),
+      body: ListView.separated(
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 50,
+             // color: Colors.amber[colorCodes[index]],
+              child: Center(child: Text( dataStr[index])),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) => const Divider(),
+          itemCount: dataStr.length),
+    );
+  }
+}
+
+class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      appBar: AppBar(
-        title: new Text("Container Demo"),
+      appBar: new AppBar(
+        title: new Text(title),
       ),
-      body: new Column(
-        children: <Widget>[
-          new Container(
-            // color: Colors.amberAccent,
-            //flutter中的view就是纯view, 它的除了自身之外的,属性,
-            // 靠Container来界定,类似于LayoutParams,
-            // 比如margin,pading,background,shape用于限定控件的边界,
-            width: 300,
-            height: 300,
-            // margin: const EdgeInsets.all(10.0),
-            //  padding: const EdgeInsets.all(10.0),
-            decoration: new BoxDecoration(
-                //类似于Android中自定义控件的描边,颜色,弧度等等shape.xml
-                color: Colors.amberAccent,
-                border: new Border.all(color: Colors.deepOrange, width: 0.1),
-                borderRadius: new BorderRadius.circular(30)),
-            child: new Text(
-              "hello",
-              textAlign: TextAlign.center,
+      body: new Container(
+        margin: new EdgeInsets.symmetric(vertical: 20.0),
+        child: new ListView(
+          //  scrollDirection: Axis.horizontal,//水平 竖直
+          children: <Widget>[
+            new Container(
+              height: 200,
+              color: Colors.yellow,
+              child: new Image.network(
+                  "https://dss0.bdstatic.com/6Ox1bjeh1BF3odCf/it/u=1499715532,534546394&fm=74&app=80&f=PNG&size=f121,121?sec=1880279984&t=a99d9993576e7c852f53a2ec624cf529"),
             ),
-          ),
-          new Container(
-            constraints: BoxConstraints.expand(
-              height:
-                  Theme.of(context).textTheme.display1.fontSize * 1.1 + 200.0,
+            new Container(
+              height: 200,
+              color: Colors.blue,
+              child: new Image.network(
+                  "https://dss0.bdstatic.com/6Ox1bjeh1BF3odCf/it/u=1499715532,534546394&fm=74&app=80&f=PNG&size=f121,121?sec=1880279984&t=a99d9993576e7c852f53a2ec624cf529"),
             ),
-            padding: const EdgeInsets.all(8.0),
-            color: Colors.blue[600],
-            alignment: Alignment.center,
-            child: Text('Hello World',
-                style: Theme.of(context)
-                    .textTheme
-                    .display1
-                    .copyWith(color: Colors.white)),
-            transform: Matrix4.rotationZ(0.1),
-          )
-        ],
+            new Container(
+              height: 200,
+              color: Colors.lightGreenAccent,
+              child: new Image.network(
+                  "https://dss0.bdstatic.com/6Ox1bjeh1BF3odCf/it/u=1499715532,534546394&fm=74&app=80&f=PNG&size=f121,121?sec=1880279984&t=a99d9993576e7c852f53a2ec624cf529"),
+            ),
+          ],
+        ),
       ),
     );
   }
