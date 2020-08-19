@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'dart1_1209/route_base_0.dart';
+import 'dart1_1209/route_base_1.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -20,6 +23,18 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        "route_base_0": (context) => new MyRoute0(text: "参数0"),
+        "/": (context) => MyHomePage(title: 'Flutter Demo Home Page'), //注册首页路由
+      },
+      onGenerateRoute: (RouteSettings setings) {
+        return MaterialPageRoute(builder: (context) {
+          String routeName = setings.name;
+          // 如果访问的路由页需要登录，但当前未登录，则直接返回登录页路由，
+          // 引导用户登录；其它情况则正常打开路由。
+
+        });
+      },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -96,13 +111,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .display1,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Navigator.pushNamed(context, "route_base_0",
+              arguments: "route_base_0参数");
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
