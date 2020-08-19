@@ -43,7 +43,13 @@ class ListDataPage extends StatelessWidget {
         title: new Text(title),
       ),
       body: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
+
+        //类似于java的匿名内部类,new lstener(BuildContext context, int index){xxx}
+          //在dart中 叫匿名函数 ,别的地方会调用本方法,执行此处的方法体实现
+        //  typedef IndexedWidgetBuilder = Widget Function(BuildContext context, int index);
+
+
+        itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 50,
              // color: Colors.amber[colorCodes[index]],
